@@ -1,0 +1,26 @@
+.bgImage {
+  background-image: url("../../public/bgmovie.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.overflow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.item {
+  position: relative;
+  z-index: 2;
+}
+
+.modalIndex {
+  position: relative;
+  z-index: 1060;
+}
