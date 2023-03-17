@@ -78,7 +78,7 @@ class ModalBooking extends Component {
   };
 
   render() {
-    let { data } = this.props;
+    let { data, times, totalSeat } = this.props;
     return (
       <div className="modalIndex">
         <div
@@ -116,7 +116,7 @@ class ModalBooking extends Component {
                     placeholder="Ho va ten"
                     value={this.state.inputName}
                     onChange={this.handleChangeName}
-                    // onBlur={this.checkValid}
+                    onBlur={this.checkValid}
                   />
                   {this.state.nameValid ? (
                     <p className="text-danger fw-semibold">
@@ -137,7 +137,7 @@ class ModalBooking extends Component {
                     id="exampleFormControlInput2"
                     placeholder="Ngày sinh"
                     value={this.state.inputAge}
-                    // onBlur={this.checkValid}
+                    onBlur={this.checkValid}
                     onChange={this.handleChangeAge}
                   />
                   {this.state.ageValid ? (
@@ -168,7 +168,11 @@ class ModalBooking extends Component {
                 {this.state.ageValid ||
                 this.state.nameValid ||
                 this.state.isDisable ? (
-                  <button className="btn btn-danger" onClick={this.checkValid}>
+                  <button
+                    className="btn btn-danger"
+                    style={{ cursor: "no-drop" }}
+                    disabled
+                  >
                     Tiếp tục
                   </button>
                 ) : (
@@ -209,22 +213,28 @@ class ModalBooking extends Component {
               </div>
               <div className="modal-body m-auto">{this.renderSeat(data)}</div>
               <div className="modal-footer">
-                <button
-                  className="btn btn-success"
-                  onClick={() => {
-                    this.props.onBooking();
-                    this.setState({
-                      inputName: "",
-                      inputAge: "",
-                      isDisable: true,
-                      inputNum: 1,
-                    });
-                  }}
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
-                  Submit
-                </button>
+                {times < totalSeat ? (
+                  <button className="btn btn-success" disabled>
+                    Submit
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      this.props.onBooking();
+                      this.setState({
+                        inputName: "",
+                        inputAge: "",
+                        isDisable: true,
+                        inputNum: 1,
+                      });
+                    }}
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    Submit
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -233,6 +243,13 @@ class ModalBooking extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    times: state.getInfoReducer.times,
+    totalSeat: state.getInfoReducer.totalSeat,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -252,4 +269,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(ModalBooking);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalBooking);
