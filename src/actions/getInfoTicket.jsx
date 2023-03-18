@@ -65,6 +65,20 @@ const getInfoReducer = (state = initialState, action) => {
       state = { info, ...restParam };
       return { ...state };
     }
+    case "PAY_TICKET": {
+      let { name, age, totalSeat, prevSeat, numSeat, price, times, info } =
+        state;
+      name = "";
+      age = "";
+      totalSeat = "";
+      prevSeat = [];
+      numSeat = [];
+      price = 0;
+      times = 0;
+      info = [];
+      state = { name, age, totalSeat, prevSeat, numSeat, price, times, info };
+      return { ...state };
+    }
     default:
       return { ...state };
   }

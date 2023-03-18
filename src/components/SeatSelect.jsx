@@ -116,8 +116,17 @@ class SeatSelect extends Component {
                 </tr>
               </tfoot>
             </table>
+            <div className="text-start">
+              <button
+                className="btn btn-success bookingMovie"
+                onClick={this.props.onPay}
+              >
+                Thanh toán
+              </button>
+            </div>
           </div>
         </div>
+
         <ModalBooking data={data} />
       </div>
     );
@@ -140,6 +149,12 @@ const mapDispatchToProps = (dispatch) => {
       const action = {
         type: "DELETE_TICKET",
         payload: item,
+      };
+      dispatch(action);
+    },
+    onPay: () => {
+      const action = {
+        type: "PAY_TICKET",
       };
       dispatch(action);
     },
