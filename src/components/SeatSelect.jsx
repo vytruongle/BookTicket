@@ -88,7 +88,7 @@ class SeatSelect extends Component {
               </div>
               <div className="text-start">
                 <button
-                  className="btn btn-outline-danger bookingMovie"
+                  className="btn btn-danger bookingMovie"
                   data-bs-target="#exampleModalToggle"
                   data-bs-toggle="modal"
                   onClick={this.props.onBookingTicket}
